@@ -317,7 +317,7 @@ export const Arcadia = () => {
             <CenteredWrapper>
               <CenteredNarrative>
                 <p>
-                  <a href="/halls">
+                  <a href="https://itegoarcanadei.com/">
                     <ElBarco src="/elbarco.webp" />
                   </a>
                 </p>
