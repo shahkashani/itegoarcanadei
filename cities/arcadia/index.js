@@ -2,7 +2,7 @@ const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
 const { resolve } = require('path');
-const { StageManager } = require('@itegoarcanadei/server-shared');
+const { StageManager, routes } = require('@itegoarcanadei/server-shared');
 const stageManager = new StageManager();
 
 const PORT = process.env.PORT || 3000;
@@ -40,6 +40,8 @@ app.get('/status', async (_req, res) => {
 app.get('/', async (_req, res) => {
   res.sendFile(PUBLIC_PAGE);
 });
+
+routes.addCommonAssetsRoute(app);
 
 app.listen(PORT, async () => {
   console.log(`Arcadia running at http://localhost:${PORT}`);
