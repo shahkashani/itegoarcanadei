@@ -4,7 +4,7 @@ Every internet mystery is backed by some (bad) code, and this one here is no exc
 
 While nothing can ever recapture the experience, perhaps this can act as a keepsake or a jumping-off point for someone.
 
-In a classic "team-of-one" fashion, there is also a complete lack of documentation in this repository, but I'll do my best to add some.
+And don't worry, there's some more documentation coming!
 
 ## Dependencies
 
