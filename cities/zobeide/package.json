@@ -1,0 +1,34 @@
+{
+  "name": "@itegoarcanadei/zobeide",
+  "version": "1.0.0",
+  "description": "The first to arrive could not understand what drew these people to Zobeide, this ugly city, this trap.",
+  "author": "Shah Kashani",
+  "license": "MIT",
+  "parcelIgnore": [
+    "socket.io.js"
+  ],
+  "scripts": {
+    "start": "node index.js",
+    "clean": "rm -rf dist .parcel-cache",
+    "build:public": "yarn parcel build src/html/public.html --no-source-maps --dist-dir dist/public",
+    "build": "yarn clean && yarn build:public",
+    "watch:public": "yarn parcel watch src/html/public.html --port 6060 --dist-dir dist/public --watch-dir ../",
+    "watch:server": "yarn nodemon --watch index.js index.js",
+    "dev": "yarn npm-run-all clean -p watch:public watch:server"
+  },
+  "dependencies": {
+    "body-parser": "^1.20.2",
+    "dotenv": "^16.4.5",
+    "express": "^4.18.2",
+    "jsonwebtoken": "^9.0.2",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "styled-components": "^6.1.8"
+  },
+  "devDependencies": {
+    "@parcel/transformer-react-refresh-wrap": "^2.11.0",
+    "nodemon": "^3.1.0",
+    "npm-run-all": "^4.1.5",
+    "parcel": "^2.11.0"
+  }
+}

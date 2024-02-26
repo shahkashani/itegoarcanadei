@@ -1,0 +1,11 @@
+{
+  "name": "@itegoarcanadei/server-shared",
+  "version": "1.0.0",
+  "main": "index.js",
+  "description": "Various utilities to power the city servers.",
+  "author": "Shah Kashani",
+  "license": "MIT",
+  "dependencies": {
+    "redis": "^4.6.13"
+  }
+}

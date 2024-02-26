@@ -1,0 +1,23 @@
+{
+  "name": "@itegoarcanadei/client-shared",
+  "version": "1.0.0",
+  "description": "Various utilities to power the city clients.",
+  "author": "Shah Kashani",
+  "source": "src/index.js",
+  "license": "MIT",
+  "dependencies": {
+    "element-resize-detector": "^1.2.4",
+    "fast-md5": "^1.0.3",
+    "intrinsic-scale": "^3.0.4",
+    "invariant": "^2.2.4",
+    "react": "^18.2.0",
+    "react-children-utilities": "^2.10.0",
+    "react-dom": "^18.2.0",
+    "react-use-cookie": "^1.5.0",
+    "styled-components": "^6.1.8",
+    "usehooks-ts": "^2.15.1"
+  },
+  "devDependencies": {
+    "parcel": "^2.11.0"
+  }
+}

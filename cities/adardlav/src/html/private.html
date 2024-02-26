@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>𑜶</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" type="text/css" href="./css/shared.css" />
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="./private.js"></script>
+    <script>
+      if (
+        /(iPad|iPhone|iPod)/g.test(navigator.userAgent) &&
+        window.addEventListener &&
+        document.querySelector
+      ) {
+        window.addEventListener('orientationchange', rotateWithNoScale, false);
+      }
+      function rotateWithNoScale() {
+        var viewport = document.querySelector('meta[name=viewport]');
+        if (viewport) {
+          var content = viewport.getAttribute('content');
+          viewport.setAttribute('content', content + ', maximum-scale=1.0');
+          alert(viewport.outerHTML);
+          setTimeout(function () {
+            viewport.setAttribute('content', content);
+          }, 90);
+        }
+      }
+    </script>
+  </body>
+</html>

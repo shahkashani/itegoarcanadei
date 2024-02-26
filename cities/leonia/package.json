@@ -1,0 +1,40 @@
+{
+  "name": "@itegoarcanadei/leonia",
+  "version": "1.0.0",
+  "description": "A fortress of indestructible leftovers surrounds Leonia, dominating it on every side, like a chain of mountains.",
+  "author": "Shah Kashani",
+  "license": "MIT",
+  "parcelIgnore": [
+    "socket.io.js"
+  ],
+  "scripts": {
+    "start": "node index.js",
+    "clean": "rm -rf dist .parcel-cache",
+    "build:public": "yarn parcel build src/html/public.html --no-source-maps --dist-dir dist/public",
+    "build:private": "yarn parcel build src/html/private.html --no-source-maps --dist-dir dist/private --public-url /static/",
+    "build": "yarn clean && yarn build:public && yarn build:private",
+    "watch:public": "yarn parcel watch src/html/public.html --port 6060 --dist-dir dist/public --watch-dir ../",
+    "watch:private": "yarn parcel watch src/html/private.html --port 6061 --dist-dir dist/private --public-url /static/ --watch-dir ../",
+    "watch:server": "yarn nodemon --watch index.js index.js",
+    "dev": "yarn npm-run-all clean -p watch:public watch:private watch:server"
+  },
+  "dependencies": {
+    "analog-clock-react": "^1.3.0",
+    "body-parser": "^1.20.2",
+    "dotenv": "^16.4.5",
+    "express": "^4.18.2",
+    "fast-md5": "^1.0.3",
+    "fecha": "^4.2.3",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "socket.io": "^4.7.4",
+    "styled-components": "^6.1.8",
+    "uuid": "^9.0.1"
+  },
+  "devDependencies": {
+    "@parcel/transformer-react-refresh-wrap": "^2.11.0",
+    "nodemon": "^3.1.0",
+    "npm-run-all": "^4.1.5",
+    "parcel": "^2.11.0"
+  }
+}

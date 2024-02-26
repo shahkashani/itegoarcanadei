@@ -1,0 +1,19 @@
+{
+  "name": "@itegoarcanadei/itegoarcanadei",
+  "version": "1.0.0",
+  "description": "Who Is The Dreamer?",
+  "author": "Shah Kashani",
+  "license": "MIT",
+  "private": true,
+  "workspaces": [
+    "cities/*",
+    "shared/*",
+    "helpers/*"
+  ],
+  "scripts": {
+    "build-all": "yarn workspaces run build"
+  },
+  "devDependencies": {
+    "process": "^0.11.10"
+  }
+}

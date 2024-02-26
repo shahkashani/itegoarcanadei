@@ -1,0 +1,7 @@
+.DS_Store
+.parcel-cache
+.env
+.env.production
+dist
+project
+node_modules

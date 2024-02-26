@@ -1,0 +1,77 @@
+@font-face {
+  font-family: 'Adelma';
+  src: url('../fonts/adelma.woff2') format('woff2');
+  font-display: block;
+}
+
+@font-face {
+  font-family: 'Sinapius';
+  src: url('../fonts/sinapius.woff2') format('woff2');
+  font-display: block;
+}
+
+@font-face {
+  font-family: 'Midnight Caller';
+  src: url('../fonts/midnight-caller.woff2') format('woff2');
+  font-display: block;
+}
+
+* {
+  -webkit-tap-highlight-color: transparent;
+}
+
+html {
+  font-size: 12px;
+}
+
+body {
+  font-family: 'Sinapius', Arial, Helvetica, sans-serif;
+  background: black;
+  color: white;
+}
+
+input,
+button,
+textarea {
+  font-family: inherit;
+}
+
+#root,
+body,
+html {
+  margin: 0;
+  padding: 0;
+}
+
+*::-webkit-scrollbar {
+  width: 6px;
+}
+
+*::-webkit-scrollbar-corner {
+  background: none;
+}
+
+*::-webkit-scrollbar-track {
+  background: none;
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: #ccc;
+  border-radius: 20px;
+}
+
+*::-webkit-scrollbar-thumb:hover {
+  background-color: #aaa;
+}
+
+#root {
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}

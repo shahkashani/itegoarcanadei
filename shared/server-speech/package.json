@@ -1,0 +1,12 @@
+{
+  "name": "@itegoarcanadei/server-speech",
+  "version": "1.0.0",
+  "main": "index.js",
+  "description": "Various utilities to bring our characters to life.",
+  "author": "Shah Kashani",
+  "license": "MIT",
+  "dependencies": {
+    "lodash": "^4.17.21",
+    "microsoft-cognitiveservices-speech-sdk": "^1.35.0"
+  }
+}
