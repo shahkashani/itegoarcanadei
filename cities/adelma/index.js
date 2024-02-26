@@ -12,7 +12,7 @@ const { pointInPoly } = require('pointinpoly');
 const { PASSWORD, COOKIE_NAME } = process.env;
 
 const PORT = process.env.PORT || 3000;
-const DESTINATION = 'https://leonora.itegoarcanadei.com/';
+const DESTINATION = 'https://leonora.itegoarcanadei.com/?adelma';
 const app = express();
 const server = http.createServer(app);
 

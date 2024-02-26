@@ -80,7 +80,7 @@ const PortalLink = ({ icon: Icon, width, addLink }) => {
 
 export const Leonora = () => {
   const adelmaCookie = !!getCookie(process.env.COOKIE_NAME);
-  const skipVideoRefer = document.referrer.indexOf('adelma') !== -1;
+  const skipVideoRefer = window.location.search.indexOf('adelma') !== -1;
   const [isShowVideo, setIsShowVideo] = useState(!skipVideoRefer);
   const [hasSeenVideo, setHasSeenVideo] = useLocalStorage('farewell', false);
   const languageData = useLanguage();
