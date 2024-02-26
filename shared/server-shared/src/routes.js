@@ -7,6 +7,7 @@ const ROBOTS = resolve(__dirname, '../assets/robots.txt');
 
 const addCommonAssetsRoute = (app) => {
   app.use('/common', express.static(COMMON_ASSETS_FOLDER));
+  app.use('/favicon.ico', express.static(FAVICON));
   app.use('/robots.txt', express.static(ROBOTS));
 };
 
