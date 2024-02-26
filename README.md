@@ -1,5 +1,7 @@
 # I Tego Arcana Dei
 
+![Flavortown Fellowship](https://www.itegoarcanadei.com/itegoarcanadei.webp)
+
 Every internet mystery is backed by some (bad) code, and this one here is no exception!
 
 While nothing can ever recapture the experience, perhaps this can act as a keepsake or a jumping-off point for someone.
