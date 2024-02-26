@@ -84,13 +84,13 @@ export const HallOfTheGods = () => {
           }
         />
         <Credits>
-          9 travelers, 730 days, 14 invisible cities, 10 tarot cards, 7 seas /
-          Cs, 3 notes hidden in the dirt, one labyrinth. On the two-year
-          anniversary of Kati's return to Arcadia, the Dreamers have once again
-          used their ingenuity, patience and resourcefulness to help Leonora
-          find her way back home, reuniting her with her friends and the secrets
-          of the Gods. They've overcome countless obstacles and left an
-          everlasting impression on Daphnis, Adrogué, the Storykeeper, Horcicky,
+          9 travelers, 730 days, 14 invisible cities, 7 seas / Cs, 3 notes
+          buried in the dirt, one labyrinth. On the two-year anniversary of
+          Kati's return to Arcadia, the Dreamers have once again used their
+          ingenuity, patience and resourcefulness to help Leonora find her way
+          back home, reuniting her with her friends and the secrets of the Gods.
+          They've overcome countless obstacles and left an everlasting
+          impression on Daphnis, Adrogué, the Storykeeper, Horcicky,
           Haselberger, The Sun Lady, Der Filmstar, Padiel, Hylas, the Cormorants
           and the many spirits they've encountered along the way. Their
           friendship, kindness and bravery will never be forgotten. May the
