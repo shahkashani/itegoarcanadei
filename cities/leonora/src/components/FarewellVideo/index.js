@@ -175,18 +175,17 @@ export const FarewellVideo = ({
       stills.findIndex(({ to, from }) => time >= from && time <= to)
     );
   }, [time]);
-
   useEffect(() => {
-    async () => {
-      if (!ref.current) {
-        return;
-      }
+    if (!ref.current) {
+      return;
+    }
+    (async () => {
       try {
         await ref.current.play();
       } catch (err) {
         setIsCannotPlay(true);
       }
-    };
+    })();
   }, [ref]);
 
   useEffect(() => {
