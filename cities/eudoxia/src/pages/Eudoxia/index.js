@@ -294,7 +294,7 @@ export const Eudoxia = () => {
             }
           }}
         >
-          <button>Play the song hidden in the griffin</button>
+          <button>Hear the voice hidden in the griffin</button>
         </PlaySong>
       </PageWrapper>
     </LanguageContext.Provider>
