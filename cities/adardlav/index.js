@@ -119,21 +119,12 @@ const getDim = (inPart, inFull) => {
   return part.indexOf(nextLetter) !== -1 ? nextLetter : null;
 };
 
-const renderLogin = (req, res, next) => {
+const renderLogin = (_req, res) => {
   return res.sendFile(PUBLIC_PAGE);
 };
 
 const authorization = (req, res, next) => {
-  const token = req.cookies[COOKIE_NAME];
-  if (!token) {
-    return renderLogin(req, res, next);
-  }
-  try {
-    jwt.verify(token, SECRET_KEY);
-    return next();
-  } catch {
-    return renderLogin(req, res, next);
-  }
+  routes.verifyLogin(req, res, next, COOKIE_NAME, SECRET_KEY, renderLogin);
 };
 
 app.use(cookieParser());
@@ -147,24 +138,6 @@ app.use(
   express.static(PRIVATE_FOLDER),
   express.static('./assets/private')
 );
-
-app.post('/login', async (req, res) => {
-  const { password } = req.body;
-  if (
-    password &&
-    password.toLowerCase().indexOf(PASSWORD.toLowerCase()) !== -1
-  ) {
-    const token = jwt.sign({}, SECRET_KEY);
-    return res
-      .cookie(COOKIE_NAME, token, {
-        httpOnly: true,
-        secure: process.env.NODE_ENV === 'production',
-      })
-      .json({ song: MP3 });
-  } else {
-    res.sendStatus(403);
-  }
-});
 
 app.post('/book', async (req, res) => {
   const { password } = req.body;
@@ -264,6 +237,21 @@ app.post('/shard', async (req, res) => {
 });
 
 routes.addCommonAssetsRoute(app);
+routes.addLoginRoute(
+  app,
+  COOKIE_NAME,
+  PASSWORD,
+  SECRET_KEY,
+  (password1, password2) => {
+    return (
+      password2 &&
+      password2.toLowerCase().indexOf(password1.toLowerCase()) !== -1
+    );
+  },
+  (res) => {
+    return res.json({ song: MP3 });
+  }
+);
 
 app.listen(PORT, async () => {
   console.log(`Adardlav running at http://localhost:${PORT}`);

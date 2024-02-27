@@ -23,7 +23,6 @@
     "express": "^4.18.2",
     "fast-md5": "^1.0.3",
     "intrinsic-scale": "^3.0.4",
-    "jsonwebtoken": "^9.0.2",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-hotkeys": "^2.0.0",

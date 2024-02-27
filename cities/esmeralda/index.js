@@ -24,16 +24,7 @@ const renderLogin = (_req, res) => {
 };
 
 const authorization = (req, res, next) => {
-  const token = req.cookies[COOKIE_NAME];
-  if (!token) {
-    return renderLogin(req, res, next);
-  }
-  try {
-    jwt.verify(token, SECRET_KEY);
-    return next();
-  } catch {
-    return renderLogin(req, res, next);
-  }
+  routes.verifyLogin(req, res, next, COOKIE_NAME, SECRET_KEY, renderLogin);
 };
 
 app.use(cookieParser());
@@ -47,26 +38,12 @@ app.use(
   express.static('./assets/private')
 );
 
-app.post('/login', async (req, res) => {
-  const { password } = req.body;
-  if (password && password.toLowerCase() === PASSWORD.toLowerCase()) {
-    const token = jwt.sign({}, SECRET_KEY);
-    return res
-      .cookie(COOKIE_NAME, token, {
-        httpOnly: true,
-        secure: process.env.NODE_ENV === 'production',
-      })
-      .sendStatus(200);
-  } else {
-    res.sendStatus(403);
-  }
-});
-
 app.get(['/', '/%E2%97%AC'], authorization, async (_req, res) => {
   res.sendFile(PRIVATE_PAGE);
 });
 
 routes.addCommonAssetsRoute(app);
+routes.addLoginRoute(app, COOKIE_NAME, PASSWORD, SECRET_KEY);
 
 app.listen(PORT, async () => {
   console.log(`Esmeralda running at http://localhost:${PORT}`);
