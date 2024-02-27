@@ -601,6 +601,12 @@ export const Leonia = () => {
     }
     setIsShowFlash(true);
     const id = setTimeout(() => {
+      if (stopDialog && stopDialog.fn) {
+        stopDialog.fn.stop();
+        setStopDialog(null);
+      }
+      setMessage(null);
+      setIsShowingMessage(false);
       setIsRoomColorDone(isRoomColor);
       setIsShowFullMask(false);
       setIsShowLeftShard(false);
