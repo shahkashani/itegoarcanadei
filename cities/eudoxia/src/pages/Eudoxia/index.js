@@ -130,10 +130,8 @@ const NarrativeContainer = styled.div`
 
 const PlaySong = styled(WithFade)`
   position: fixed;
-  left: 0;
-  right: 0;
+  right: 10px;
   bottom: 10px;
-  text-align: center;
   z-index: 2;
 
   button {
