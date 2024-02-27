@@ -1,4 +1,4 @@
-import { createRef, useEffect } from 'react';
+import { createRef, useEffect, useState } from 'react';
 import styled, { css } from 'styled-components';
 
 import { useAudioPlayer } from '@itegoarcanadei/client-shared';
@@ -131,7 +131,7 @@ export const Log = ({
   youLabel = 'You',
 }) => {
   const lastMessageRef = createRef();
-
+  const [stopAudio, setStopAudio] = useState(null);
   const { playAudio } = useAudioPlayer();
 
   useEffect(() => {
@@ -153,7 +153,14 @@ export const Log = ({
           }
           return (
             <LogLine
-              onPlayAudio={(file) => playAudio(file, { volume: 0.5 })}
+              onPlayAudio={async (file) => {
+                if (stopAudio && stopAudio.fn) {
+                  stopAudio.fn.stop();
+                }
+                setStopAudio({
+                  fn: await playAudio(file, { volume: 0.05, stopFn: true }),
+                });
+              }}
               message={message}
               key={i}
               youLabel={youLabel}

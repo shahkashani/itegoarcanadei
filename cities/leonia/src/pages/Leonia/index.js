@@ -516,6 +516,7 @@ export const Leonia = () => {
   const [isRoomColor, setIsRoomColor] = useState(false);
   const [isRoomColorDone, setIsRoomColorDone] = useState(isRoomColor);
   const [isSending, setIsSending] = useState(false);
+  const [stopDialog, setStopDialog] = useState(null);
 
   const languageData = useLanguage();
   const { isEnglish } = languageData;
@@ -692,7 +693,7 @@ export const Leonia = () => {
     updateInventory(true);
   }, []);
 
-  const popNextMessage = () => {
+  const popNextMessage = async () => {
     if (messages.length === 0) {
       if (isShowLog || (isShowLogButton && log.length === 0)) {
         updateLog();
@@ -703,8 +704,13 @@ export const Leonia = () => {
     setIsShowingMessage(true);
     setMessage(nextMessage);
     setMessages(rest);
+    if (stopDialog && stopDialog.fn) {
+      stopDialog.fn.stop();
+    }
     if (nextMessage.file && isAudioInitialized) {
-      playAudio(nextMessage.file, { volume: 0.5 });
+      setStopDialog({
+        fn: await playAudio(nextMessage.file, { volume: 0.5, stopFn: true }),
+      });
     }
   };
 
@@ -917,7 +923,17 @@ export const Leonia = () => {
               </InventoryButton>
             </Inventory>
             <LogContainer isVisible={isShowLog}>
-              <Log messages={log} tsLastVisit={tsLastVisit} />
+              <Log
+                isPlayAudio={false}
+                messages={log}
+                tsLastVisit={tsLastVisit}
+                onClick={(message) => {
+                  setMessage(null);
+                  setIsShowingMessage(false);
+                  setMessages([message]);
+                  popNextMessage();
+                }}
+              />
             </LogContainer>
           </StyledStore>
         )}

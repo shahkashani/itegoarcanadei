@@ -1,4 +1,4 @@
-import { createRef, useEffect } from 'react';
+import { createRef, useEffect, useState } from 'react';
 import styled, { css } from 'styled-components';
 
 import { useAudioPlayer } from '@itegoarcanadei/client-shared';
@@ -74,6 +74,7 @@ const LogLine = ({
   canDelete,
   onDelete,
   onPlayAudio,
+  onClick,
   youLabel,
   isSeparator,
 }) => {
@@ -82,8 +83,9 @@ const LogLine = ({
   return (
     <Line $isSeparator={isSeparator}>
       <LineWrapper
-        $canClick={!!file}
+        $canClick={!!file || onClick}
         onClick={() => {
+          onClick?.(message);
           if (file) {
             onPlayAudio?.(file);
           }
@@ -119,10 +121,12 @@ export const Log = ({
   messages,
   canDelete,
   onDelete,
+  onClick,
+  isPlayAudio = true,
   youLabel = 'You',
 }) => {
   const lastMessageRef = createRef();
-
+  const [stopAudio, setStopAudio] = useState(null);
   const { playAudio } = useAudioPlayer();
 
   useEffect(() => {
@@ -142,7 +146,18 @@ export const Log = ({
         }
         return (
           <LogLine
-            onPlayAudio={(file) => playAudio(file, { volume: 0.5 })}
+            onClick={(message) => onClick?.(message)}
+            onPlayAudio={async (file) => {
+              if (!isPlayAudio) {
+                return;
+              }
+              if (stopAudio && stopAudio.fn) {
+                stopAudio.fn.stop();
+              }
+              setStopAudio({
+                fn: await playAudio(file, { volume: 0.5, stopFn: true }),
+              });
+            }}
             message={message}
             key={i}
             youLabel={youLabel}
