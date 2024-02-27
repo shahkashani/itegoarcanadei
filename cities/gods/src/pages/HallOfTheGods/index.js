@@ -87,13 +87,14 @@ export const HallOfTheGods = () => {
             buried in the dirt. One Oneiro.
           </p>
           <p>
-            On the two-year anniversary of Kati's return to Arcadia, Amelia,
-            August, Christina, Ester, Marn, Mars, Paddington, Significantfoliage
-            and Snow used their ingenuity, patience and resourcefulness to help
-            Leonora find her way back home. They left an indelible mark on the
-            hearts of Daphnis, Adrogué, the Storykeeper, Horcicky, Haselberger,
-            The Sun Lady, Der Filmstar, Padiel, Hylas, the Cormorants and the
-            many spirits they encountered along the way.
+            Amelia, August, Christina, Ester, Marn, Mars, Paddington,
+            Significantfoliage and Snow used their ingenuity, patience and
+            resourcefulness to help Leonora find her way home to
+            Arcadia—reuniting her with Kati and Remedios once again. These
+            Dreamers left an indelible mark on the hearts of Daphnis, Adrogué,
+            the Storykeeper, Horcicky, Haselberger, The Sun Lady, Der Filmstar,
+            Padiel, Hylas, the Cormorants and the many spirits they encountered
+            along the way.
           </p>
           <p>Their kindness and bravery will never be forgotten.</p>
           <p>Long live the Flavortown Fellowship ▲△</p>
