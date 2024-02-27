@@ -268,13 +268,15 @@ const CrumbledPaper = ({ message, number, onRead }) => {
   );
 };
 
-const MessageView = ({ message, isEnglish, onClose }) => {
+const MessageView = ({ message, isEnglish, onClose, onPlay }) => {
   const [isEnded, setIsEnded] = useState(false);
   const { playAudio } = useAudioPlayer();
 
   useEffect(() => {
     if (message.file && isEnded) {
-      playAudio(message.file, { volume: 0.05 });
+      (async () => {
+        onPlay(await playAudio(message.file, { volume: 0.05, stopFn: true }));
+      })();
     }
   }, [message.file, isEnded]);
 
@@ -434,7 +436,8 @@ export const Argia = () => {
   const [showSendMessage, setShowSendMessage] = useState(false);
   const tsLastVisit = useMemo(() => Date.now(), []);
   const { isAudioInitialized, playAudio, initializeAudio } = useAudioPlayer();
-  const [stopAudio, setStopAudio] = useState(null);
+  const [stopMusic, setStopMusic] = useState(null);
+  const [stopDialog, setStopDialog] = useState(null);
   const languageData = useLanguage();
   const { isEnglish } = languageData;
 
@@ -510,12 +513,12 @@ export const Argia = () => {
       if (!isAudioInitialized) {
         return;
       }
-      if (!isMusic && stopAudio) {
-        stopAudio.fn.fade(5);
-        setStopAudio(null);
+      if (!isMusic && stopMusic) {
+        stopMusic.fn.fade(5);
+        setStopMusic(null);
       }
-      if (isMusic && !stopAudio) {
-        setStopAudio({
+      if (isMusic && !stopMusic) {
+        setStopMusic({
           fn: await playAudio('/horcicky.mp3', {
             loop: true,
             volume: 0.1,
@@ -523,13 +526,20 @@ export const Argia = () => {
         });
       }
     };
-  }, [isAudioInitialized, isMusic, stopAudio]);
+  }, [isAudioInitialized, isMusic, stopMusic]);
 
   const crumple = () => {
     if (isAudioInitialized) {
       playAudio('/crumple.mp3', { volume: 0.005 });
     }
   };
+
+  useEffect(() => {
+    if (stopDialog && stopDialog.fn) {
+      stopDialog.fn.stop();
+      setStopDialog(null);
+    }
+  }, [showMessage]);
 
   return (
     <LanguageContext.Provider value={languageData}>
@@ -620,6 +630,7 @@ export const Argia = () => {
           <MessageView
             isEnglish={isEnglish}
             message={showMessage}
+            onPlay={(play) => setStopDialog({ fn: play })}
             onClose={() => setShowMessage(null)}
           />
         )}

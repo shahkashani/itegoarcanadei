@@ -46,11 +46,13 @@ export class AudioPlayer {
     ctl.source[ctl.source.stop ? 'stop' : 'noteOff'](0);
   }
 
-  async play(file, options) {
+  async play(file, inOptions = {}) {
+    const options = inOptions || {};
     const buffer = await this.load(file);
     const ctl = this.createSource(buffer, options);
+
     return new Promise((resolve) => {
-      if (ctl.source.loop) {
+      if (ctl.source.loop || options.stopFn) {
         const stop = () => {
           this.stopCtl(ctl);
           ctl.source.disconnect();
@@ -81,7 +83,7 @@ export class AudioPlayer {
         resolve({ stop, fade });
       } else {
         let timer;
-        if (options && options.onProgress) {
+        if (options.onProgress) {
           timer = setInterval(() => {
             options.onProgress(ctl.source.context.currentTime);
           }, options.progressInterval || 100);
