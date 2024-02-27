@@ -132,6 +132,7 @@ export const MultiNarrative = ({
   delayBetween,
   fadeAtEndPause,
   onComplete = () => null,
+  onSkip,
   iconColor,
   useTextShadow = true,
   onlyLastParagraph = true,
@@ -145,10 +146,11 @@ export const MultiNarrative = ({
   const count = Children.count(children);
   const useDelayBetween = delayBetween ? delayBetween : isFast ? 1000 : 2000;
 
-  const onSkip = () => {
+  const onSkipClick = () => {
     setIsPaused(false);
     setNarrativeIndex(count - 1);
     setIsShowControls(false);
+    onSkip?.();
   };
 
   const onPause = () => {
@@ -212,7 +214,7 @@ export const MultiNarrative = ({
             onClick={(e) => {
               e.stopPropagation();
               e.preventDefault();
-              onSkip();
+              onSkipClick();
             }}
           >
             <StopIcon height={14} fill={iconColor} />

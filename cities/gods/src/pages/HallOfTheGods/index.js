@@ -71,7 +71,6 @@ const ShowLinks = styled.span`
 export const HallOfTheGods = () => {
   const languageData = useLanguage();
   const { isEnglish } = languageData;
-  const [isShowLinks, setShowLinks] = useState(false);
 
   return (
     <LanguageContext.Provider value={languageData}>
@@ -94,26 +93,23 @@ export const HallOfTheGods = () => {
           Haselberger, The Sun Lady, Der Filmstar, Padiel, Hylas, the Cormorants
           and the many spirits they've encountered along the way. Their
           friendship, kindness and bravery will never be forgotten. May the
-          Flavortown Fellowship live forever{' '}
-          <ShowLinks onClick={() => setShowLinks(!isShowLinks)}>◬</ShowLinks>
-          {isShowLinks && (
-            <Links>
-              <a href="https://media.itegoarcanadei.com/flavortown-fellowship-sights.zip">
-                Sights
-              </a>
-              <Separator />
-              <a href="https://media.itegoarcanadei.com/flavortown-fellowship.zip">
-                Sounds
-              </a>
-              <Separator />
-              <a
-                href="https://github.com/shahkashani/itegoarcanadei"
-                target="_blank"
-              >
-                Source
-              </a>
-            </Links>
-          )}
+          Flavortown Fellowship live forever!
+          <Links>
+            <a href="https://media.itegoarcanadei.com/flavortown-fellowship-sights.zip">
+              Sights
+            </a>
+            <Separator />
+            <a href="https://media.itegoarcanadei.com/flavortown-fellowship.zip">
+              Sounds
+            </a>
+            <Separator />
+            <a
+              href="https://github.com/shahkashani/itegoarcanadei"
+              target="_blank"
+            >
+              Source
+            </a>
+          </Links>
         </Credits>
       </Page>
     </LanguageContext.Provider>

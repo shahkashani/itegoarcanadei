@@ -266,7 +266,7 @@ export const LoginPage = () => {
   }, [isAudioPlaying]);
 
   if (isShowCity) {
-    return <Esmeralda isMuted={false} />;
+    return <Esmeralda />;
   }
 
   return (

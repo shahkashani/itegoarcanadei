@@ -9,6 +9,7 @@ import {
   LanguageContext,
   useLanguage,
   GodSettings,
+  FadeOut,
   BREAKPOINT_SMALL,
 } from '@itegoarcanadei/client-shared';
 import styled, { css } from 'styled-components';
@@ -105,15 +106,6 @@ const Button = styled.button`
   line-height: 0;
 `;
 
-const FadeOut = styled.div`
-  position: fixed;
-  background: black;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-`;
-
 const Image = styled(FadeImage)`
   width: 100%;
   aspect-ratio: 3/2;
@@ -152,11 +144,19 @@ const PageWrapper = styled.div`
   font-size: 1.5rem;
   line-height: 3rem;
 
+  @media (max-width: ${BREAKPOINT_SMALL}px) {
+    font-size: 1rem;
+  }
+
   ${({ $isEnglish }) =>
     $isEnglish &&
     css`
       font-family: 'Zobeide';
       font-size: 2rem;
+
+      @media (max-width: ${BREAKPOINT_SMALL}px) {
+        font-size: 1.5rem;
+      }
     `};
 `;
 
@@ -258,12 +258,7 @@ export const Zobeide = () => {
   };
 
   const onDeparture = async () => {
-    const response = await fetch('/depart', { method: 'POST' });
-    if (!response.ok) {
-      return;
-    }
-    const { url } = await response.json();
-    setGotoUrl(url);
+    setGotoUrl('https://adelma.itegoarcanadei.com/');
   };
 
   useEffect(() => {
@@ -562,13 +557,10 @@ export const Zobeide = () => {
           </Wrapper>
         </Content>
         {message && gotoUrl && (
-          <WithFadeCallback
-            fadeDuration={5000}
-            isVisible={true}
-            onDone={() => (window.location.href = gotoUrl)}
-          >
-            <FadeOut />
-          </WithFadeCallback>
+          <FadeOut
+            duration={5000}
+            onComplete={() => (window.location.href = gotoUrl)}
+          />
         )}
       </PageWrapper>
     </LanguageContext.Provider>

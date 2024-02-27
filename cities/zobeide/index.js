@@ -26,7 +26,6 @@ const CHECK_INTERVAL = 5000;
 const DREAMERS_SIGN = 'dreamers-sign';
 const DREAMERS_DIRECTION = 'dreamers-direction';
 const DREAMERS_MESSAGE = 'dreamers-message';
-const NEXT_PAGE_URL = 'https://adelma.itegoarcanadei.com/';
 
 let numConnections = 0;
 let timerId;
@@ -116,11 +115,6 @@ app.post('/utter', async (req, res) => {
   await emitStatus();
 
   res.sendStatus(200);
-});
-
-app.post('/depart', async (req, res) => {
-  await stageManager.setStage(req, res, STAGE + 1);
-  res.json({ url: NEXT_PAGE_URL });
 });
 
 io.on('connection', async (socket) => {

@@ -7,6 +7,7 @@ import {
   useLanguage,
   LanguageContext,
   GodSettings,
+  BREAKPOINT_SMALL,
 } from '@itegoarcanadei/client-shared';
 import { Water } from '../../icons/Water';
 
@@ -49,6 +50,10 @@ const Cover = styled.div`
     css`
       font-family: 'Waltz';
       font-size: 1.8rem;
+
+      @media (max-width: ${BREAKPOINT_SMALL}px) {
+        font-size: 1.3rem;
+      }
     `};
 `;
 
@@ -73,9 +78,9 @@ const Poem = styled.div`
 const Her = styled.span`
   opacity: 0.5;
   animation: ${smoke} 4000ms both;
-  animation-delay: ${({ num }) =>
+  animation-delay: ${({ $num }) =>
     css`
-      ${FADE_PAUSE + END_PAUSE + 5000 + num * 200}ms
+      ${FADE_PAUSE + END_PAUSE + 5000 + $num * 200}ms
     `};
 `;
 
@@ -106,13 +111,13 @@ const Button = styled.div`
   }
 `;
 
-export const Esmeralda = ({ isMuted: propsIsMuted = true }) => {
-  const [isMuted, setIsMuted] = useState(propsIsMuted);
+export const Esmeralda = () => {
   const [isShowNarrative, setIsShowNarrative] = useState(false);
   const [isShowPoem, setIsShowPoem] = useState(true);
   const [isCountingDown, setIsCountingDown] = useState(false);
   const [isVideoPlaying, setIsVideoPlaying] = useState(false);
   const [showContinue, setShowContinue] = useState(false);
+  const [isShowControls, setIsShowControls] = useState(true);
   const [isHidingContinue, setIsHidingContinue] = useState(false);
   const ref = useRef();
   const languageData = useLanguage();
@@ -125,6 +130,7 @@ export const Esmeralda = ({ isMuted: propsIsMuted = true }) => {
     const id = setInterval(() => {
       if (ref.current.currentTime > FADE_OUT_POINT) {
         setIsShowNarrative(false);
+        setIsShowControls(false);
         clearTimeout(id);
         setTimeout(() => {
           document.location.href = NEXT_CITY;
@@ -141,19 +147,36 @@ export const Esmeralda = ({ isMuted: propsIsMuted = true }) => {
     setTimeout(() => setIsShowNarrative(true), 4300);
   }, [isVideoPlaying]);
 
+  const playVideo = async () => {
+    try {
+      await ref.current.play();
+      setShowContinue(false);
+    } catch (err) {
+      setShowContinue(true);
+    }
+  };
+
+  const onSkip = () => {
+    if (ref.current) {
+      ref.current.currentTime = FADE_OUT_POINT - 5;
+    }
+  };
+
   return (
     <LanguageContext.Provider value={languageData}>
-      <GodSettings
-        triggerSettings={{ background: '#332a28', fill: '#806f6b' }}
-        city="Esmeralda"
-      />
-      <div onClick={() => setIsMuted(false)}>
+      {isShowControls && (
+        <GodSettings
+          triggerSettings={{ background: '#252628', fill: '#686868' }}
+          city="Esmeralda"
+        />
+      )}
+      <div>
         <FullPageVideo
           ref={ref}
           still="/static/esmeralda.jpg"
           playsInline
           disablePictureInPicture
-          muted={isMuted}
+          muted={false}
           onTime={(time) => {
             if (time > 0) {
               setIsVideoPlaying(true);
@@ -172,11 +195,7 @@ export const Esmeralda = ({ isMuted: propsIsMuted = true }) => {
                 <MultiNarrative
                   onComplete={() => {
                     setIsShowPoem(false);
-                    if (isMuted) {
-                      setShowContinue(true);
-                    } else {
-                      ref.current.play();
-                    }
+                    playVideo();
                   }}
                 >
                   <div>
@@ -189,9 +208,8 @@ export const Esmeralda = ({ isMuted: propsIsMuted = true }) => {
                   </div>
                   <div>
                     <Poem>
-                      <p>
-                        To one side from ourselves, to one side from the world
-                      </p>
+                      <p>To one side from ourselves,</p>
+                      <p>to one side from the world</p>
                       <p>Wave follows wave to break on the shore,</p>
                       <p>On each wave is a star, a person, a bird,</p>
                       <p>Dreams, reality, death - on wave after wave.</p>
@@ -202,7 +220,7 @@ export const Esmeralda = ({ isMuted: propsIsMuted = true }) => {
                       <p>No need for a date: I was, I am, and I will be.</p>
                       <p>Life is a wonder of wonders, and to wonder</p>
                       <p>I dedicate myself, on my knees, like an orphan,</p>
-                      <p>Alone — among mirrors — fenced in by reflections:</p>
+                      <p>Alone—among mirrors—fenced in by reflections:</p>
                       <p>Cities and seas, iridescent, intensified.</p>
                     </Poem>
                   </div>
@@ -230,6 +248,7 @@ export const Esmeralda = ({ isMuted: propsIsMuted = true }) => {
                   hideSpeedButton={true}
                   fadeDuration={FADE_PAUSE}
                   fadeAtEndPause={END_PAUSE}
+                  onSkip={() => onSkip()}
                 >
                   <div>
                     <p>I recall past lives.</p>
@@ -244,19 +263,19 @@ export const Esmeralda = ({ isMuted: propsIsMuted = true }) => {
                         <Her>Darling.</Her>
                       </p>
                       <p>
-                        <Her num={1}>Lake Tenaya will cradle us.</Her>
+                        <Her $num={1}>Lake Tenaya will cradle us.</Her>
                       </p>
                       <p>
-                        <Her num={2}>And all we leave behind.</Her>
+                        <Her $num={2}>And all we leave behind.</Her>
                       </p>
                       <p>
-                        <Her num={3}>Listen.</Her>
+                        <Her $num={3}>Listen.</Her>
                       </p>
                       <p>
-                        <Her num={4}>Ever-so faint slow tambourine.</Her>
+                        <Her $num={4}>Ever-so faint slow tambourine.</Her>
                       </p>
                       <p>
-                        <Her num={5}>Is marching back through time.</Her>
+                        <Her $num={5}>Is marching back through time.</Her>
                       </p>
                     </div>
                   </div>
