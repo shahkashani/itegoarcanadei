@@ -7,6 +7,8 @@ import {
   LanguageContext,
   useLanguage,
   GodSettings,
+  WithFade,
+  useAudioPlayer,
 } from '@itegoarcanadei/client-shared';
 import styled, { css } from 'styled-components';
 
@@ -16,6 +18,14 @@ const BREAKPOINT = 800;
 
 const x = (value) => `${(value / WIDTH) * 100}%`;
 const y = (value) => `${(value / HEIGHT) * 100}%`;
+
+const PageWrapper = styled.div`
+  ${({ $isEnglish }) =>
+    $isEnglish &&
+    css`
+      font-family: 'Alchemy';
+    `};
+`;
 
 const Container = styled.div`
   position: relative;
@@ -116,12 +126,26 @@ const NarrativeContainer = styled.div`
   @media (max-width: ${BREAKPOINT}px) {
     font-size: max(14px, 2.5vw);
   }
+`;
 
-  ${({ $isEnglish }) =>
-    $isEnglish &&
-    css`
-      font-family: 'Alchemy';
-    `};
+const PlaySong = styled(WithFade)`
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 10px;
+  text-align: center;
+  z-index: 2;
+
+  button {
+    font-family: inherit;
+    background: #1a1613;
+    border: none;
+    border-radius: 5px;
+    outline: none;
+    cursor: pointer;
+    padding: 8px 10px;
+    color: #ccb390;
+  }
 `;
 
 function isTouchEnabled() {
@@ -139,119 +163,140 @@ export const Eudoxia = () => {
   const [seenFish2, setSeenFish2] = useState(false);
   const [seenBird, setSeenBird] = useState(false);
   const [isGo, setGo] = useState(false);
+  const [isPlayingAudio, setIsPlayingAudio] = useState(false);
   const [showDiv, setShowDiv] = useState(isTouchEnabled());
   const languageData = useLanguage();
+  const { playAudio } = useAudioPlayer();
   const { isEnglish } = languageData;
 
   return (
     <LanguageContext.Provider value={languageData}>
-      <FullPageImage src="/griffin.jpg" opacity={0.12} />
-      <GodSettings triggerSettings={{ background: '#292020' }} city="Eudoxia" />
-      <Container>
-        <ImageWrapper
-          onMouseEnter={() => (isTouchEnabled() ? null : setShowDiv(true))}
-          onMouseLeave={() => (isTouchEnabled() ? null : setShowDiv(false))}
+      <PageWrapper $isEnglish={isEnglish}>
+        <FullPageImage src="/griffin.jpg" opacity={0.12} />
+        <GodSettings
+          triggerSettings={{ background: '#292020' }}
+          city="Eudoxia"
+        />
+        <Container>
+          <ImageWrapper
+            onMouseEnter={() => (isTouchEnabled() ? null : setShowDiv(true))}
+            onMouseLeave={() => (isTouchEnabled() ? null : setShowDiv(false))}
+          >
+            <MainImage
+              startDelay={1000}
+              fadeSpeed={4000}
+              src="/1.jpg"
+              onComplete={() => setSeenBg(true)}
+            />
+            {seenBg && !seenNarrative && (
+              <NarrativeContainer>
+                <MultiNarrative
+                  iconColor="#463535"
+                  onComplete={() => setSeenNarrative(true)}
+                >
+                  <div>
+                    <div>
+                      <p>I remember the moths.</p>
+                      <p>They surrounded me.</p>
+                      <p>I was the light.</p>
+                      <p>And so were they.</p>
+                      <p>Kati.</p>
+                      <p>Remedios.</p>
+                      <p>The triad protecting the Breach.</p>
+                      <p>The threshold.</p>
+                      <p>The great barrier.</p>
+                    </div>
+                  </div>
+                  <div>
+                    <div>
+                      <p>The night ended.</p>
+                      <p>But the sun did not rise.</p>
+                      <p>And now I know why.</p>
+                    </div>
+                  </div>
+                  <div>
+                    <div>
+                      <p>Oh, I remember you.</p>
+                      <p>The old guardians.</p>
+                      <p>Dwelling under Arcadia.</p>
+                      <p>Waiting for instructions.</p>
+                      <p>You awoke to greet us.</p>
+                      <p>You awoke.</p>
+                      <p>The little immortals.</p>
+                      <p>The Sidheogaidhe.</p>
+                    </div>
+                  </div>
+                  <div>
+                    <div>
+                      <p>Where are they now?</p>
+                      <p>Where am I now?</p>
+                    </div>
+                  </div>
+                  <div>
+                    <div>
+                      <p>Eudoxia.</p>
+                      <p>This city and I are one.</p>
+                      <p>This tapestry, these streets.</p>
+                      <p>The blueprint and the reality.</p>
+                      <p>A mirror of the celestial world.</p>
+                    </div>
+                  </div>
+                  <div>
+                    <div>
+                      <p>Which is the manifest version of the other?</p>
+                      <p>Which voice is mortal and which is divine?</p>
+                    </div>
+                    <div>
+                      <p>What hides in the images that we weave?</p>
+                    </div>
+                  </div>
+                  <div></div>
+                </MultiNarrative>
+              </NarrativeContainer>
+            )}
+            {seenNarrative && (
+              <FirstFish
+                startDelay={2000}
+                fadeSpeed={3000}
+                src="/2.png"
+                onComplete={() => setSeenFish1(true)}
+              />
+            )}
+            {seenBird && (
+              <SecondFish
+                fadeSpeed={3000}
+                src="/4.png"
+                onComplete={() => setSeenFish2(true)}
+              />
+            )}
+            {seenFish1 && (
+              <Bird
+                fadeSpeed={5000}
+                src="/3.png"
+                onComplete={() => setSeenBird(true)}
+              />
+            )}
+            {isGo && <Egg src="/ovum.png" />}
+            {seenFish2 && !isGo && showDiv && (
+              <Div
+                onClick={() => setGo(true)}
+                onTouchStart={() => setGo(true)}
+              />
+            )}
+          </ImageWrapper>
+        </Container>
+        <PlaySong
+          isVisible={!isPlayingAudio && seenNarrative}
+          onClick={() => {
+            if (!isPlayingAudio) {
+              setIsPlayingAudio(true);
+              playAudio('/loom.mp3');
+            }
+          }}
         >
-          <MainImage
-            startDelay={3000}
-            fadeSpeed={7000}
-            src="/1.jpg"
-            onComplete={() => setSeenBg(true)}
-          />
-          {seenBg && !seenNarrative && (
-            <NarrativeContainer $isEnglish={isEnglish}>
-              <MultiNarrative
-                iconColor="#463535"
-                onComplete={() => setSeenNarrative(true)}
-              >
-                <div>
-                  <div>
-                    <p>I remember the moths.</p>
-                    <p>They surrounded me.</p>
-                    <p>I was the light.</p>
-                    <p>And so were they.</p>
-                    <p>Kati.</p>
-                    <p>Remedios.</p>
-                    <p>The triad protecting the Breach.</p>
-                    <p>The threshold.</p>
-                    <p>The great barrier.</p>
-                  </div>
-                </div>
-                <div>
-                  <div>
-                    <p>The night ended.</p>
-                    <p>But the sun did not rise.</p>
-                    <p>And now I know why.</p>
-                  </div>
-                </div>
-                <div>
-                  <div>
-                    <p>Oh, I remember you.</p>
-                    <p>The old guardians.</p>
-                    <p>Dwelling under Arcadia.</p>
-                    <p>Waiting for instructions.</p>
-                    <p>You awoke to greet us.</p>
-                    <p>You awoke.</p>
-                    <p>The little immortals.</p>
-                    <p>The Sidheogaidhe.</p>
-                  </div>
-                </div>
-                <div>
-                  <div>
-                    <p>Where are they now?</p>
-                    <p>Where am I now?</p>
-                  </div>
-                </div>
-                <div>
-                  <div>
-                    <p>Eudoxia.</p>
-                    <p>This city and I are one.</p>
-                    <p>This tapestry, these streets.</p>
-                    <p>The blueprint and the reality.</p>
-                    <p>A mirror of the celestial world.</p>
-                  </div>
-                </div>
-                <div>
-                  <div>
-                    <p>Which is the manifest version of the other?</p>
-                    <p>Which voice is mortal and which is divine?</p>
-                  </div>
-                  <div>
-                    <p>What hides in the images that we weave?</p>
-                  </div>
-                </div>
-                <div></div>
-              </MultiNarrative>
-            </NarrativeContainer>
-          )}
-          {seenNarrative && (
-            <FirstFish
-              startDelay={2000}
-              fadeSpeed={3000}
-              src="/2.png"
-              onComplete={() => setSeenFish1(true)}
-            />
-          )}
-          {seenBird && (
-            <SecondFish
-              fadeSpeed={3000}
-              src="/4.png"
-              onComplete={() => setSeenFish2(true)}
-            />
-          )}
-          {seenFish1 && (
-            <Bird
-              fadeSpeed={5000}
-              src="/3.png"
-              onComplete={() => setSeenBird(true)}
-            />
-          )}
-          {isGo && <Egg src="/ovum.png" />}
-          {seenFish2 && !isGo && showDiv && (
-            <Div onClick={() => setGo(true)} onTouchStart={() => setGo(true)} />
-          )}
-        </ImageWrapper>
-      </Container>
+          <button>Play the song hidden in the griffin</button>
+        </PlaySong>
+      </PageWrapper>
     </LanguageContext.Provider>
   );
 };
