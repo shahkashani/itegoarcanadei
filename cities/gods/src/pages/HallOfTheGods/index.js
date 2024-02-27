@@ -5,7 +5,6 @@ import {
   useLanguage,
   GodSettings,
 } from '@itegoarcanadei/client-shared';
-import { useState } from 'react';
 
 const fade = keyframes`
   0% { opacity: 0 };
@@ -88,18 +87,15 @@ export const HallOfTheGods = () => {
             buried in the dirt. One Oneiro.
           </p>
           <p>
-            On the two-year anniversary of Kati's return to Arcadia, the
-            Dreamers have once again used their ingenuity, patience and
-            resourcefulness to help Leonora find her way back home, reuniting
-            her with her friends and the secrets of the Gods.
+            On the two-year anniversary of Kati's return to Arcadia, Amelia,
+            August, Christina, Ester, Marn, Mars, Paddington, Significantfoliage
+            and Snow used their ingenuity, patience and resourcefulness to help
+            Leonora find her way back home. They left an indelible mark on the
+            hearts of Daphnis, Adrogué, the Storykeeper, Horcicky, Haselberger,
+            The Sun Lady, Der Filmstar, Padiel, Hylas, the Cormorants and the
+            many spirits they encountered along the way.
           </p>
-          <p>
-            They've overcome countless obstacles and left an everlasting
-            impression on Daphnis, Adrogué, the Storykeeper, Horcicky,
-            Haselberger, The Sun Lady, Der Filmstar, Padiel, Hylas, the
-            Cormorants and the many spirits they've encountered along the way.
-          </p>
-          <p>Their friendship, kindness and bravery will never be forgotten.</p>
+          <p>Their kindness and bravery will never be forgotten.</p>
           <p>Long live the Flavortown Fellowship ▲△</p>
           <Links>
             <a href="https://media.itegoarcanadei.com/flavortown-fellowship-sights.zip">
