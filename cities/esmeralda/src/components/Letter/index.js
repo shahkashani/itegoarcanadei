@@ -46,7 +46,11 @@ const Text = styled.div`
   padding: 50px;
   animation: ${fade} 4000ms 1000ms ease-in-out both;
   transition: color 2000ms ease-in-out;
-  color: #403735;
+  color: #635a58;
+
+  p {
+    margin: 8px 0;
+  }
 
   ${({ $isFading }) =>
     $isFading &&
@@ -56,7 +60,7 @@ const Text = styled.div`
 `;
 
 const P = styled.div`
-  margin-top: 50px;
+  margin-top: 30px;
 `;
 
 const Lake = styled.p`
