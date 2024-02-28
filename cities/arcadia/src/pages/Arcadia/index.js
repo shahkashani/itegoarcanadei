@@ -9,6 +9,8 @@ import {
 import { useState } from 'react';
 import styled, { keyframes } from 'styled-components';
 
+const HALL_OF_GODS = 'https://itegoarcanadei.com/';
+
 const fade = keyframes`
   0% { opacity: 0};
 `;
@@ -281,6 +283,7 @@ export const Arcadia = () => {
   const [isShowingForm, setIsShowingForm] = useState(false);
   const [statusText, setStatusText] = useState(null);
   const [hasFetchedStatus, setHasFetchStatus] = useState(false);
+  const [redirectId, setRedirectId] = useState(null);
 
   const fetchStatus = async () => {
     const response = await fetch('/status');
@@ -298,6 +301,17 @@ export const Arcadia = () => {
       setHasFetchStatus(true);
     })();
   }, []);
+
+  useEffect(() => {
+    clearTimeout(redirectId);
+    if (status === 'closed') {
+      setRedirectId(
+        setTimeout(() => {
+          window.location.href = HALL_OF_GODS;
+        }, 10000)
+      );
+    }
+  }, [status]);
 
   useInterval(async () => {
     await fetchStatus();
@@ -317,7 +331,7 @@ export const Arcadia = () => {
             <CenteredWrapper>
               <CenteredNarrative>
                 <p>
-                  <a href="https://itegoarcanadei.com/">
+                  <a href={HALL_OF_GODS}>
                     <ElBarco src="/elbarco.webp" />
                   </a>
                 </p>
