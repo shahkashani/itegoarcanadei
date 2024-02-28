@@ -7,6 +7,7 @@ import {
   LanguageContext,
   useLanguage,
   GodSettings,
+  BREAKPOINT_SMALL,
 } from '@itegoarcanadei/client-shared';
 
 import { CrossFader } from '../../components/CrossFader';
@@ -34,7 +35,7 @@ const SubContainer = styled.div`
   box-sizing: border-box;
   margin-left: -10px;
 
-  @media (max-width: 600px) {
+  @media (max-width: ${BREAKPOINT_SMALL}px) {
     font-size: 1rem;
   }
 
@@ -42,6 +43,7 @@ const SubContainer = styled.div`
     $isEnglish &&
     css`
       font-family: 'Indago Inn';
+      font-size: 1.5rem;
       line-height: 1.5;
     `};
 `;
@@ -274,45 +276,69 @@ export const TheIndagoInn = () => {
                   >
                     <div>
                       <G>G,</G>
-                      <p>
+                      <div>
                         This is an attempt to contact you from the land where
-                        all stories dwell. I want to tell you everything that
-                        has happened since I arrived, but there is no time. I
-                        still haven't found her. Our pages never seem to
-                        overlap. Something tells me I am at the right place,
-                        just not the right time.
+                        all stories dwell.
+                      </div>
+                    </div>
+                    <div>
+                      <div>
+                        I want to tell you everything that has happened since I
+                        arrived, but there is no time.
+                      </div>
+                    </div>
+                    <div>
+                      <p>I still haven't found her.</p>
+                      <p>Our pages never seem to overlap.</p>
+                      <p>
+                        Something tells me I am at the right place, just not the
+                        right time.
                       </p>
                     </div>
                     <div>
-                      <p>
+                      <div>
                         There are people here who have met her. I met someone in
                         Euphemia who has received inquiries about her from the
                         beyond. Someone else is searching. Someone else is
-                        following her moments through this land. Maybe it's a
-                        guide. And maybe it's her other, trying to track her
-                        down. I hope not. You and I both know the ramifications
-                        if she finds her.
-                      </p>
+                        following her moments through this land.
+                      </div>
                     </div>
                     <div>
-                      <p>
+                      <div>
+                        Maybe it's a guide. And maybe it's her other, trying to
+                        track her down. I hope not. You and I both know the
+                        ramifications if she finds her.
+                      </div>
+                    </div>
+                    <div>
+                      <div>
                         I try not to let it distract me, but I still don't know
                         what happened to the others. To the triad, to the
-                        griffins, to the seekers. I hope you have been able to
-                        find the site of the Breach. I know you are travelling,
-                        I know you are looking, but there are too many places,
-                        there are too many timelines.
-                      </p>
+                        griffins, to the seekers.
+                      </div>
                     </div>
                     <div>
-                      <p>
-                        I am at the Indāgo Inn, but she's not here. She was
-                        supposed to be here. Actually, there's no one here. It
-                        feels like the entire city is on pause. I am doing what
-                        I can, but I don't know how long I can stay. I left her
-                        the key to the room. Where it will lead, I cannot know.
-                        I hope somehow it's to you. I hope it's to safety.
-                      </p>
+                      <div>
+                        I hope you have been able to find the site of the
+                        Breach. I know you are travelling, I know you are
+                        looking, but there are too many places, there are too
+                        many timelines.
+                      </div>
+                    </div>
+                    <div>
+                      <div>
+                        I am at the Indāgō Inn, but she's not here. She was
+                        supposed to be here. There is no one here. The entire
+                        city is motionless.
+                      </div>
+                    </div>
+                    <div>
+                      <div>
+                        I am doing what I can, but I don't know how long I can
+                        stay. I left her the key to the room. Where it will
+                        lead, I cannot know. I hope somehow it's to you. I hope
+                        it's to safety.
+                      </div>
                     </div>
                     <div>
                       <p>
