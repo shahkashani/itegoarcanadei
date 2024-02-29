@@ -9,3 +9,4 @@ export * from './useWindowSize';
 export * from './useImageScale';
 export * from './useDarkMode';
 export * from './useLanguage';
+export * from './useSelection';
