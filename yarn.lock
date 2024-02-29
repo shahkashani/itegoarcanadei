@@ -1164,6 +1164,11 @@ agent-base@^6.0.1:
   dependencies:
     debug "4"
 
+an-array-of-french-words@^2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/an-array-of-french-words/-/an-array-of-french-words-2.0.0.tgz#a83f5228c2042ed630e4e30409e5488240e88309"
+  integrity sha512-LRPhVZLteE0wrUFimKWcrEtXZcv8XiG9TArm37j7/PdO2G5f6UfgCny+ibH8CascxMXFMzTPlJcP01PgSmei8Q==
+
 analog-clock-react@^1.3.0:
   version "1.3.0"
   resolved "https://registry.yarnpkg.com/analog-clock-react/-/analog-clock-react-1.3.0.tgz#36866af745ed5d6c5b3e62dd7a19c21157bc0198"
@@ -4064,6 +4069,11 @@ which@^2.0.1:
   integrity sha512-BLI3Tl1TW3Pvl70l3yq3Y64i+awpwXqsGBYWkkqMtnbXgrMD+yj7rhW0kuEDxzJaYXGjEW5ogapKNMEKNMjibA==
   dependencies:
     isexe "^2.0.0"
+
+wordlist-english@^1.2.1:
+  version "1.2.1"
+  resolved "https://registry.yarnpkg.com/wordlist-english/-/wordlist-english-1.2.1.tgz#7a76da3c7ac26919d80d1a54056c796830febdf7"
+  integrity sha512-vaiQQiu95UeON0WZFtiTrWfZmIiUd2rhrhMCBeEzwq3oTVzHCX8naGCqv/smSspE9kH2sN+E8lZyV0JZjqSzGw==
 
 "wrap-ansi-cjs@npm:wrap-ansi@^7.0.0":
   version "7.0.0"
