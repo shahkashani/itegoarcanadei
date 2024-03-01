@@ -80,7 +80,6 @@ app.use(express.static(PUBLIC_FOLDER));
 app.use(express.static('./assets/public'));
 app.use(
   '/static',
-  authorization,
   express.static(PRIVATE_FOLDER),
   express.static('./assets/private')
 );
