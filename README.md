@@ -42,32 +42,41 @@ Once you have `nvm` or `node` installed, in the `itegoarcanadei` root folder, ru
 
 That's it.
 
-## Entering the cities
+## Setup
 
 To get things up and running, run the following commands in your Terminal:
 
 1. `git clone https://github.com/shahkashani/itegoarcanadei.git`
 2. `cd itegoarcanadei`
-3. `nvm i`
-4. `yarn`
+3. `nvm i` (to switch to the correct version of node)
+4. `yarn` (to download dependencies)
 
-Then, for each city, you should be able to do something like:
+## Entering the land
 
-1. `cd cities/euphemia`
+To run all the cities at once:
+
+1. `cd itegoarcanadei`
+2. `yarn build-all` (this will take about a lifetime to complete)
+3. `yarn start` (this will output the URL for each city)
+
+## Entering individual cities
+
+If you want to run the cities individually:
+
+1. `cd cities/<cityname>` e.g. `cd cities/adelma`
+2. `yarn build`
+3. `PORT=4000 yarn start` (or whatever port number you prefer)
+4. Navigate to `http://localhost:4000` in your browser
+
+### Entering individual cities in development mode
+
+In development mode, every time you change a line of code, the city will recompile and automatically update to show your changes.
+
+1. `cd cities/<cityname>` e.g. `cd cities/adelma`
 2. `yarn dev`
 3. Navigate to `http://localhost:3000` in your browser
 
 Some notes:
 
-1. Every time you change a line of code, the city will recompile and automatically update to show your changes
-2. By default each city runs on port 3000, so if you leave this as-is, you'll need to CTRL+C out of the city before running another one
-3. Some cities will have various things you can configure, like the passwords to enter them. These variables live in the `.env.local` files in the cities where this is relevant. You can override them by editing this file, or by creating a similar file called `.env.production` with the same variables
-
-### Production mode
-
-To run the city in production mode (i.e. not have the city recompile on you every time you make a code change), in the city folder, simply run:
-
-1. `cd cities/adelma`
-2. `yarn build`
-3. `yarn start` (or something like `PORT=4000 yarn start` to run on a different port)
-4. Navigate to `http://localhost:3000` (or e.g. `http://localhost:4000`) in your browser
+1. By default each city runs on port `3000`, so if you leave this as-is, you'll need to CTRL+C out of the city before running another one
+2. Some cities will have various things you can configure, like the passwords to enter them. These variables live in the `.env.local` files in the cities where this is relevant. You can override them by editing this file, or by creating a similar file called `.env.production` with the same variables

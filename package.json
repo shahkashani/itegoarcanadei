@@ -11,7 +11,8 @@
     "helpers/*"
   ],
   "scripts": {
-    "build-all": "yarn workspaces run build"
+    "build-all": "yarn workspaces run build",
+    "start": "node index.js"
   },
   "devDependencies": {
     "process": "^0.11.10"
