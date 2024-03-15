@@ -144,9 +144,10 @@ export const LoginPage = () => {
           <Bypass
             type="button"
             onClick={() => {
+              const password = MAURILIA_PASSWORD;
               setInputType('text');
-              setPassword(process.env.PASSWORD);
-              onLogin(process.env.PASSWORD);
+              setPassword(password);
+              onLogin(password);
             }}
           >
             Skip login

@@ -26,8 +26,12 @@ const BOOK_KEY = 'valdrada-book';
 const BOOK_STATE_KEY = 'cormorants';
 const MP3 = '/e060f71aecc0bb69fc660ac583634bb7.mp3';
 
-const { COOKIE_NAME, SECRET_KEY, PASSWORD, MICROSOFT_AZURE_SPEECH_TOKEN } =
-  process.env;
+const {
+  VALDRADA_COOKIE_NAME,
+  VALDRADA_SECRET_KEY,
+  VALDRADA_PASSWORD,
+  VALDRADA_MICROSOFT_AZURE_SPEECH_TOKEN,
+} = process.env;
 
 const PUBLIC_FOLDER = resolve(__dirname, './dist/public');
 const PRIVATE_FOLDER = resolve(__dirname, './dist/private');
@@ -63,14 +67,21 @@ const VOICES = {
 };
 
 const ts = new TextToSpeech({
-  token: MICROSOFT_AZURE_SPEECH_TOKEN,
+  token: VALDRADA_MICROSOFT_AZURE_SPEECH_TOKEN,
   isVerbose: true,
 });
 
 const renderLogin = (_req, res) => res.sendFile(PUBLIC_PAGE);
 
 const authorization = (req, res, next) =>
-  routes.verifyLogin(req, res, next, COOKIE_NAME, SECRET_KEY, renderLogin);
+  routes.verifyLogin(
+    req,
+    res,
+    next,
+    VALDRADA_COOKIE_NAME,
+    VALDRADA_SECRET_KEY,
+    renderLogin
+  );
 
 app.use(cookieParser());
 app.use(bodyParser.json());
@@ -154,9 +165,9 @@ app.post('/shard', async (_req, res) => {
 routes.addCommonAssetsRoute(app);
 routes.addLoginRoute(
   app,
-  COOKIE_NAME,
-  PASSWORD,
-  SECRET_KEY,
+  VALDRADA_COOKIE_NAME,
+  VALDRADA_PASSWORD,
+  VALDRADA_SECRET_KEY,
   (password1, password2) => {
     return (
       password2 &&

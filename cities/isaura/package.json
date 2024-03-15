@@ -12,7 +12,7 @@
     "build": "yarn clean && yarn build:public && yarn build:private",
     "watch:public": "yarn parcel watch src/html/public.html --port 6060 --dist-dir dist/public --watch-dir ../",
     "watch:private": "yarn parcel watch src/html/private.html --port 6061 --dist-dir dist/private --watch-dir ../",
-    "watch:server": "yarn nodemon --watch index.js index.js",
+    "watch:server": "yarn nodemon --watch index.js --watch server.js index.js",
     "dev": "yarn npm-run-all clean -p watch:public watch:private watch:server"
   },
   "dependencies": {

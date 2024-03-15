@@ -30,11 +30,11 @@ const NEXT_CITY = 'https://esmeralda.itegoarcanadei.com';
 const MP3 = '/9dd1ee9823ac8b8bb603a0bc67104656.mp3';
 
 const {
-  COOKIE_NAME,
-  SECRET_KEY,
-  PASSWORD,
-  MICROSOFT_AZURE_SPEECH_TOKEN,
-  BOOK_PASSWORD,
+  ADARDLAV_COOKIE_NAME,
+  ADARDLAV_SECRET_KEY,
+  ADARDLAV_PASSWORD,
+  ADARDLAV_MICROSOFT_AZURE_SPEECH_TOKEN,
+  ADARDLAV_BOOK_PASSWORD,
 } = process.env;
 
 const PUBLIC_FOLDER = resolve(__dirname, './dist/public');
@@ -108,7 +108,7 @@ const VOICES = {
 };
 
 const ts = new TextToSpeech({
-  token: MICROSOFT_AZURE_SPEECH_TOKEN,
+  token: ADARDLAV_MICROSOFT_AZURE_SPEECH_TOKEN,
   voiceLanguage: /en\-(GB|US)/,
   isVerbose: true,
 });
@@ -126,7 +126,14 @@ const getDim = (inPart, inFull) => {
 const renderLogin = (_req, res) => res.sendFile(PUBLIC_PAGE);
 
 const authorization = (req, res, next) =>
-  routes.verifyLogin(req, res, next, COOKIE_NAME, SECRET_KEY, renderLogin);
+  routes.verifyLogin(
+    req,
+    res,
+    next,
+    ADARDLAV_COOKIE_NAME,
+    ADARDLAV_SECRET_KEY,
+    renderLogin
+  );
 
 app.use(cookieParser());
 app.use(bodyParser.json());
@@ -144,17 +151,17 @@ app.post('/book', async (req, res) => {
   const { password } = req.body;
   if (
     password &&
-    password.toLowerCase().indexOf(BOOK_PASSWORD.toLowerCase()) !== -1
+    password.toLowerCase().indexOf(ADARDLAV_BOOK_PASSWORD.toLowerCase()) !== -1
   ) {
-    const token = jwt.sign({}, SECRET_KEY);
+    const token = jwt.sign({}, ADARDLAV_SECRET_KEY);
     return res
-      .cookie(COOKIE_NAME, token, {
+      .cookie(ADARDLAV_COOKIE_NAME, token, {
         httpOnly: true,
         secure: process.env.NODE_ENV === 'production',
       })
       .json({ exit: true });
   } else {
-    const dim = getDim(password, BOOK_PASSWORD);
+    const dim = getDim(password, ADARDLAV_BOOK_PASSWORD);
     if (dim) {
       res.json({ dim });
     } else {
@@ -238,9 +245,9 @@ app.post('/shard', async (_req, res) => {
 routes.addCommonAssetsRoute(app);
 routes.addLoginRoute(
   app,
-  COOKIE_NAME,
-  PASSWORD,
-  SECRET_KEY,
+  ADARDLAV_COOKIE_NAME,
+  ADARDLAV_PASSWORD,
+  ADARDLAV_SECRET_KEY,
   (password1, password2) => {
     return (
       password2 &&

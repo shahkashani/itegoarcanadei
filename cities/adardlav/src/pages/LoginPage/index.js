@@ -403,7 +403,7 @@ export const LoginPage = () => {
             </Deus>
           </Form>
           <PlaySong>
-            <button onClick={() => playSong(process.env.PASSWORD)}>
+            <button onClick={() => playSong(process.env.ADARDLAV_PASSWORD)}>
               Enter Adardlav
             </button>
           </PlaySong>

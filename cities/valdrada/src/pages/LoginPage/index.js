@@ -490,7 +490,7 @@ export const LoginPage = () => {
             </KeyboardGuide>
           )}
           <PlaySong>
-            <button onClick={() => playSong(process.env.PASSWORD)}>
+            <button onClick={() => playSong(process.env.VALDRADA_PASSWORD)}>
               Enter Valdrada
             </button>
           </PlaySong>

@@ -10,7 +10,7 @@
     "build:public": "yarn parcel build src/html/public.html --no-source-maps --dist-dir dist/public",
     "build": "yarn clean && yarn build:public",
     "watch:public": "yarn parcel watch src/html/public.html --port 6060 --dist-dir dist/public --watch-dir ../",
-    "watch:server": "nodemon --watch index.js index.js",
+    "watch:server": "yarn nodemon --watch index.js --watch server.js index.js",
     "dev": "yarn npm-run-all clean -p watch:public watch:server"
   },
   "dependencies": {

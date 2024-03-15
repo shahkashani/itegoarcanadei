@@ -15,7 +15,8 @@ dotenv.config({
 
 const leoniaManager = new LeoniaManager();
 
-const { COOKIE_NAME, SECRET_KEY, PASSWORD } = process.env;
+const { EUPHEMIA_COOKIE_NAME, EUPHEMIA_SECRET_KEY, EUPHEMIA_PASSWORD } =
+  process.env;
 
 const BOOK_ID = 9788070357590;
 
@@ -75,7 +76,14 @@ const getHylas = {
 const renderLogin = (_req, res) => res.sendFile(PUBLIC_PAGE);
 
 const authorization = (req, res, next) =>
-  routes.verifyLogin(req, res, next, COOKIE_NAME, SECRET_KEY, renderLogin);
+  routes.verifyLogin(
+    req,
+    res,
+    next,
+    EUPHEMIA_COOKIE_NAME,
+    EUPHEMIA_SECRET_KEY,
+    renderLogin
+  );
 
 app.use(cookieParser());
 app.use(bodyParser.json());
@@ -111,7 +119,7 @@ app.post('/order', authorization, (req, res) => {
   res.sendStatus(200);
 });
 
-app.get('/inventory', authorization, (req, res) => {
+app.get('/inventory', authorization, (_req, res) => {
   if (existsSync(ORDER_FILE)) {
     return res.json({});
   }
@@ -123,6 +131,11 @@ app.get('/inventory', authorization, (req, res) => {
 app.get('/', authorization, async (_req, res) => res.sendFile(PRIVATE_PAGE));
 
 routes.addCommonAssetsRoute(app);
-routes.addLoginRoute(app, COOKIE_NAME, PASSWORD, SECRET_KEY);
+routes.addLoginRoute(
+  app,
+  EUPHEMIA_COOKIE_NAME,
+  EUPHEMIA_PASSWORD,
+  EUPHEMIA_SECRET_KEY
+);
 
 module.exports = app;

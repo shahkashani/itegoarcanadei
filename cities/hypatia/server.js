@@ -12,7 +12,7 @@ dotenv.config({
   override: true,
 });
 
-const { DAPHNIS_COOKIE_NAME, DAPHNIS_SECRET_KEY, DAPHNIS_PASSWORD } =
+const { HYPATIA_COOKIE_NAME, HYPATIA_SECRET_KEY, HYPATIA_PASSWORD } =
   process.env;
 
 const PUBLIC_FOLDER = resolve(__dirname, './dist/public');
@@ -22,20 +22,17 @@ const ASSETS_PRIVATE = resolve(__dirname, './assets/private');
 const PUBLIC_PAGE = resolve(PUBLIC_FOLDER, './public.html');
 const PRIVATE_PAGE = resolve(PRIVATE_FOLDER, './private.html');
 
-const renderLogin = (_req, res) => {
-  return res.sendFile(PUBLIC_PAGE);
-};
+const renderLogin = (_req, res) => res.sendFile(PUBLIC_PAGE);
 
-const authorization = (req, res, next) => {
+const authorization = (req, res, next) =>
   routes.verifyLogin(
     req,
     res,
     next,
-    DAPHNIS_COOKIE_NAME,
-    DAPHNIS_SECRET_KEY,
+    HYPATIA_COOKIE_NAME,
+    HYPATIA_SECRET_KEY,
     renderLogin
   );
-};
 
 app.use(cookieParser());
 app.use(bodyParser.json());
@@ -47,16 +44,15 @@ app.use(
   express.static(PRIVATE_FOLDER),
   express.static(ASSETS_PRIVATE)
 );
-app.get('/', authorization, (_req, res) => {
-  res.sendFile(PRIVATE_PAGE);
-});
 
 routes.addCommonAssetsRoute(app);
 routes.addLoginRoute(
   app,
-  DAPHNIS_COOKIE_NAME,
-  DAPHNIS_PASSWORD,
-  DAPHNIS_SECRET_KEY
+  HYPATIA_COOKIE_NAME,
+  HYPATIA_PASSWORD,
+  HYPATIA_SECRET_KEY
 );
+
+app.get('/', authorization, (_req, res) => res.sendFile(PRIVATE_PAGE));
 
 module.exports = app;

@@ -12,7 +12,8 @@ dotenv.config({
   override: true,
 });
 
-const { COOKIE_NAME, SECRET_KEY, PASSWORD } = process.env;
+const { ESMERALDA_COOKIE_NAME, ESMERALDA_SECRET_KEY, ESMERALDA_PASSWORD } =
+  process.env;
 
 const PUBLIC_FOLDER = resolve(__dirname, './dist/public');
 const PRIVATE_FOLDER = resolve(__dirname, './dist/private');
@@ -25,9 +26,15 @@ const renderLogin = (_req, res) => {
   return res.sendFile(PUBLIC_PAGE);
 };
 
-const authorization = (req, res, next) => {
-  routes.verifyLogin(req, res, next, COOKIE_NAME, SECRET_KEY, renderLogin);
-};
+const authorization = (req, res, next) =>
+  routes.verifyLogin(
+    req,
+    res,
+    next,
+    ESMERALDA_COOKIE_NAME,
+    ESMERALDA_SECRET_KEY,
+    renderLogin
+  );
 
 app.use(cookieParser());
 app.use(bodyParser.json());
@@ -45,6 +52,11 @@ app.get(['/', '/%E2%97%AC'], authorization, (_req, res) =>
 );
 
 routes.addCommonAssetsRoute(app);
-routes.addLoginRoute(app, COOKIE_NAME, PASSWORD, SECRET_KEY);
+routes.addLoginRoute(
+  app,
+  ESMERALDA_COOKIE_NAME,
+  ESMERALDA_PASSWORD,
+  ESMERALDA_SECRET_KEY
+);
 
 module.exports = app;

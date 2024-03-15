@@ -10,7 +10,20 @@ const apps = [
   ['Valdrada', 3008],
   ['Adardlav', 3009],
   ['Esmeralda', 3010],
+  ['Andria', 3011],
+  ['Moriana', 3012],
+  ['Leonia', 3013],
+  ['Hypatia', 3014],
+  ['Argia', 3015],
+  ['Zobeide', 3016],
+  ['Adelma', 3017],
+  ['Leonora', 3018],
+  ['Arcadia', 3019],
 ];
+
+process.on('unhandledRejection', (reason) =>
+  console.error('Unhandled error', reason)
+);
 
 apps.forEach(([name, port]) => {
   try {
@@ -19,6 +32,6 @@ apps.forEach(([name, port]) => {
       console.log(`${name} running at http://localhost:${port}`);
     });
   } catch (err) {
-    console.error(err);
+    console.error(`${name}:`, err);
   }
 });

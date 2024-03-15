@@ -12,9 +12,10 @@ dotenv.config({
   override: true,
 });
 
-const IS_ARCHIVE = process.env.ARCHIVE === 'true';
+const IS_ARCHIVE = process.env.MAURILIA_ARCHIVE === 'true';
 
-const { COOKIE_NAME, SECRET_KEY, PASSWORD } = process.env;
+const { MAURILIA_COOKIE_NAME, MAURILIA_SECRET_KEY, MAURILIA_PASSWORD } =
+  process.env;
 
 const PUBLIC_FOLDER = resolve(__dirname, './dist/public');
 const PRIVATE_FOLDER = resolve(__dirname, './dist/private');
@@ -28,7 +29,14 @@ const ARCHIVE_PAGE = resolve(__dirname, './src/public/archive.html');
 const renderLogin = (_req, res) => res.sendFile(PUBLIC_PAGE);
 
 const authorization = (req, res, next) =>
-  routes.verifyLogin(req, res, next, COOKIE_NAME, SECRET_KEY, renderLogin);
+  routes.verifyLogin(
+    req,
+    res,
+    next,
+    MAURILIA_COOKIE_NAME,
+    MAURILIA_SECRET_KEY,
+    renderLogin
+  );
 
 app.use(cookieParser());
 app.use(bodyParser.json());
@@ -48,6 +56,11 @@ if (IS_ARCHIVE) {
 }
 
 routes.addCommonAssetsRoute(app);
-routes.addLoginRoute(app, COOKIE_NAME, PASSWORD, SECRET_KEY);
+routes.addLoginRoute(
+  app,
+  MAURILIA_COOKIE_NAME,
+  MAURILIA_PASSWORD,
+  MAURILIA_SECRET_KEY
+);
 
 module.exports = app;
