@@ -6,8 +6,11 @@ const bodyParser = require('body-parser');
 const { resolve } = require('path');
 const { routes } = require('@itegoarcanadei/server-shared');
 
-dotenv.config({ path: './.env.local' });
-dotenv.config({ path: './.env.production', override: true });
+dotenv.config({ path: resolve(__dirname, './.env.local') });
+dotenv.config({
+  path: resolve(__dirname, './.env.production'),
+  override: true,
+});
 
 const { COOKIE_NAME, SECRET_KEY, PASSWORD } = process.env;
 
