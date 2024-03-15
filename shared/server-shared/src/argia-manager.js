@@ -21,7 +21,6 @@ class ArgiaManager {
       return;
     }
     await this.client.connect();
-    console.log('Connected to stage manager!');
   };
 
   getKey = async (key) => {
