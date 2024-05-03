@@ -5,7 +5,7 @@ const { routes } = require('@itegoarcanadei/server-shared');
 
 const PUBLIC_FOLDER = resolve(__dirname, './dist/public');
 const PRIVATE_FOLDER = resolve(__dirname, './dist/private');
-const ASSETS_PUBLIC = resolve(__dirname, './assets/public');
+const ASSETS_PUBLIC = resolve(__dirname, './assets');
 const PUBLIC_PAGE = resolve(PUBLIC_FOLDER, './public.html');
 const PRIVATE_PAGE = resolve(PRIVATE_FOLDER, './private.html');
 
