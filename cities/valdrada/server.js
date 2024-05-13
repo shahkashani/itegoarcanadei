@@ -90,7 +90,6 @@ app.use(DIALOG_URL, express.static(ASSETS_DIALOG));
 app.use(express.static(ASSETS_PUBLIC));
 app.use(
   '/static',
-  authorization,
   express.static(PRIVATE_FOLDER),
   express.static(ASSETS_PRIVATE)
 );
